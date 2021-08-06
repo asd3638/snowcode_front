@@ -20,6 +20,7 @@ class Header extends React.Component {
                         <Nav className="me-auto">
                             <Nav.Link href="#home">Home</Nav.Link>
                             <Nav.Link href="#mypage">MyPage</Nav.Link>
+                            <Nav.Link href="#chat">Chat</Nav.Link>
                             <NavDropdown title="category" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">스터디</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">공모전</NavDropdown.Item>

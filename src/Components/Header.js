@@ -42,7 +42,8 @@ class Header extends React.Component {
                             </Nav.Link>
                         </Nav>
                         <Nav>
-                            <Button variant="light">글쓰기</Button>
+                            <Button variant="light">로그인</Button>
+                            <Button style={{marginLeft: '10px'}}variant="light">글쓰기</Button>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

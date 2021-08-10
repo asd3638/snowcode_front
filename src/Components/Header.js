@@ -1,5 +1,16 @@
-import { Container, Nav, Navbar, NavDropdown, Button } from 'react-bootstrap'
+import { Container, Nav, Navbar, NavDropdown, Button, Popover, OverlayTrigger } from 'react-bootstrap'
 import React from 'react'
+
+const popover = (
+    <Popover id="popover-basic">
+        <Popover.Header as="h3">snowcode는?</Popover.Header>
+        <Popover.Body>
+            다양한 프로젝트 경험을 쌓고 싶은 송<br/>
+            신뢰할 수 있는 팀원을 만나고 싶은 송<br/><br/>
+            <strong>숙명 IT 전공자가 만든 IT 전공자를 위한 웹사이트 입니다.</strong>
+        </Popover.Body>
+    </Popover>
+);
 
 class Header extends React.Component {
     render() {
@@ -37,9 +48,9 @@ class Header extends React.Component {
                                     href="#mypage"
                                 />{' '}
                                 User Name</Nav.Link>
-                            <Nav.Link eventKey={2} href="#about">
-                                about
-                            </Nav.Link>
+                            <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
+                                <Nav.Link>About</Nav.Link>
+                            </OverlayTrigger>
                         </Nav>
                         <Nav>
                             <Button variant="light">로그인</Button>

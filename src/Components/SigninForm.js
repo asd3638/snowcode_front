@@ -25,6 +25,15 @@ function SigninForm() {
                         </Button>
                     </div>
                 </Form>
+                <div style={{float: 'right', marginTop: '10px'}}>
+                    <img
+                        alt=""
+                        src={require("../Assets/main_logo.png").default}
+                        width="30"
+                        height="30"
+                    />{' '}
+                    snowcode
+                </div>
             </Card.Body>
         </Card>
     );

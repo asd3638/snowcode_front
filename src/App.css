@@ -11,3 +11,7 @@
 .snsloginBtn {
     align-items: flex-end;
 }
+.scroll {
+    max-height: 550px;
+    overflow-y: auto;
+}

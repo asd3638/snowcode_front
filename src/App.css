@@ -1,0 +1,8 @@
+.loginCard {
+    width: 30rem;
+    margin: auto;
+    margin-top: 200px;
+}
+.snsloginBtn {
+    align-items: flex-end;
+}

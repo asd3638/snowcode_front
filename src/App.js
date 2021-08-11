@@ -10,7 +10,6 @@ function App() {
         <Route path="/signin" component={SigninPage}/>
         <Route path="/main" component={MainPage}/>
         <Route path="/detail" component={DetailPage}/>
-        <Route path="/main" component={MainPage} />
       </BrowserRouter>
     </div>
     

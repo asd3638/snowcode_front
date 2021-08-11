@@ -1,9 +1,13 @@
 import React from "react";
 import Header from '../Components/Header';
+import CardView from '../Components/CardView';
  
 const MainPage = () => {
   return (
-    <Header/>
+    <div>
+      <Header/>
+      <CardView/>
+    </div>
   );
 };
 export default MainPage;

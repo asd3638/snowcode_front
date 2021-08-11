@@ -7,12 +7,9 @@ class CardView extends React.Component {
       <Card style={{ width: "18rem" }}>
         <Card.Img variant="top" src="holder.js/100px180" />
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Card.Title>파이썬 공부</Card.Title>
+          <Card.Text>모집 인원 : 5, 모집 기한 : 2021/07/04</Card.Text>
+          <Button variant="primary">참여하기</Button>
         </Card.Body>
       </Card>
     );

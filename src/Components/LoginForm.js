@@ -34,23 +34,16 @@ function LoginForm() {
             })
         .then(res => {
             console.log(res)
-            console.log('res.data.userId :: ', res.data.userId)
-            console.log('res.data.msg :: ', res.data.msg)
-            // if(res.data.userId === undefined){
-            //     // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
-            //     console.log('======================',res.data.msg)
-            //     alert('입력하신 id 가 일치하지 않습니다.')
-            // } else if(res.data.userId === null){
-            //     // id는 있지만, pw 는 다른 경우 userId = null , msg = undefined
-            //     console.log('======================','입력하신 비밀번호 가 일치하지 않습니다.')
-            //     alert('입력하신 비밀번호 가 일치하지 않습니다.')
-            // } else if(res.data.userId === inputEmail) {
-            //     // id, pw 모두 일치 userId = userId1, msg = undefined
-            //     console.log('======================','로그인 성공')
-            //     sessionStorage.setItem('user_id', res.data.userId)
-            // }
-            // // 작업 완료 되면 페이지 이동(새로고침)
-            // document.location.href = '/'
+            console.log('res.data.userId :: ', res.data)
+            if(res.data.id === undefined){
+                // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
+                alert('등록된 사용자 정보가 없습니다. 아이디와 비밀번호를 확인하세요.');
+                document.location.href = '/'
+            } else if(res.data.email === inputEmail) {
+                // id, pw 모두 일치 userId = userId1, msg = undefined
+                sessionStorage.setItem('user_id', res.data);
+                document.location.href = '/main'
+            }
         })
         .catch()
     }

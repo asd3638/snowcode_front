@@ -27,13 +27,10 @@ function SigninForm() {
             password: inputPw
         })
         .then(res => {
-            console.log(res)
-            console.log('res.data.userId :: ', res.data.userId)
-            console.log('res.data.msg :: ', res.data.msg)
-            if(res.data == "already exist"){
+            if(res.data === "already exist"){
                 alert('입력하신 정보로 회원이 이미 존재합니다.');
                 document.location.href = '/';
-            } else if(res.data == "success"){
+            } else if(res.data === "success"){
                 alert('정상 가입 되었습니다. 로그인 페이지로 이동합니다.')
                 document.location.href = '/';
             }

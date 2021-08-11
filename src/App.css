@@ -1,0 +1,17 @@
+.loginCard {
+    width: 30rem;
+    margin: auto;
+    margin-top: 200px;
+}
+.signinCard {
+    width: 30rem;
+    margin: auto;
+    margin-top: 200px;
+}
+.snsloginBtn {
+    align-items: flex-end;
+}
+.scroll {
+    max-height: 550px;
+    overflow-y: auto;
+}

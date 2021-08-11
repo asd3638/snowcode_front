@@ -33,9 +33,7 @@ function LoginForm() {
             }
             })
         .then(res => {
-            console.log(res)
-            console.log('res.data.userId :: ', res.data)
-            if(res.data.id === undefined){
+            if(res.data === "fail"){
                 // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
                 alert('등록된 사용자 정보가 없습니다. 아이디와 비밀번호를 확인하세요.');
                 document.location.href = '/'

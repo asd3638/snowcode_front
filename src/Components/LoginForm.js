@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Button, Card, Form } from 'react-bootstrap';
 import { FcGoogle } from "react-icons/fc";
 import { RiKakaoTalkFill } from "react-icons/ri";
-import axios from "axios";
+import api from "../Api/api"
 import "../App.css"
 
 function LoginForm() {
@@ -16,15 +16,22 @@ function LoginForm() {
     const handleInputPw = (e) => {
         setInputPw(e.target.value)
     }
+    const handleSigninBtn = () => {
+        document.location.href = '/signin'
+    }
     const onSubmitHandler = (e) => {
         e.preventDefault();
         console.log('click login')
         console.log('ID : ', inputEmail)
         console.log('PW : ', inputPw)
-        axios.post('/auth/login', {
-            email: inputEmail,
-            password: inputPw
-        })
+        api({
+            method: 'post',
+            url: 'auth/login',
+            data: {
+                email: inputEmail,
+                password: inputPw
+            }
+            })
         .then(res => {
             console.log(res)
             console.log('res.data.userId :: ', res.data.userId)
@@ -40,7 +47,7 @@ function LoginForm() {
             // } else if(res.data.userId === inputEmail) {
             //     // id, pw 모두 일치 userId = userId1, msg = undefined
             //     console.log('======================','로그인 성공')
-            //     sessionStorage.setItem('user_id', inputId)
+            //     sessionStorage.setItem('user_id', res.data.userId)
             // }
             // // 작업 완료 되면 페이지 이동(새로고침)
             // document.location.href = '/'
@@ -68,7 +75,7 @@ function LoginForm() {
                         <Button variant="outline-primary" size="sm" type="submit">
                             로그인
                         </Button>
-                        <Button variant="outline-primary" size="sm" type="submit" style={{marginLeft: '5px'}}>
+                        <Button variant="outline-primary" size="sm" style={{marginLeft: '5px'}} onClick={handleSigninBtn}>
                             회원가입
                         </Button>
                         <div style={{float: "right"}}>

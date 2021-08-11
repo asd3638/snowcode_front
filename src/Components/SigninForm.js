@@ -14,9 +14,6 @@ function SigninForm() {
     const handleInputPw = (e) => {
         setInputPw(e.target.value)
     }
-    const handleSigninBtn = () => {
-        document.location.href = '/signin'
-    }
     const onSubmitHandler = (e) => {
         e.preventDefault();
         console.log('click login')

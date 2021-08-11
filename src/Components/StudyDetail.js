@@ -1,4 +1,4 @@
-import {Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import {Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import "../App.css"
 
 function StudyDetail() {

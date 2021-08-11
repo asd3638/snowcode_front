@@ -5,8 +5,8 @@ import Header from '../Components/Header'
 const MyPage = () => {
   return (
       <div>
-            <Header/>
-            <User/>
+        <Header/>
+        <User/>
       </div>
   );
 };

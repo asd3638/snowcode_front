@@ -4,7 +4,7 @@ import { LoginPage, SigninPage, MainPage, DetailPage, AddStudyPage, MyPage} from
 
 function App() {
   return (
-    <div className="App">
+    <span className="App">
       <BrowserRouter>
         <Route exact path="/" component={LoginPage}/>
         <Route path="/signin" component={SigninPage}/>
@@ -13,7 +13,7 @@ function App() {
         <Route path="/write" component={AddStudyPage}/>
         <Route path="/mypage" component={MyPage}/>
       </BrowserRouter>
-    </div>
+    </span>
     
   );
 }

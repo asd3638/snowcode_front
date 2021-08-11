@@ -2,9 +2,6 @@ import {Button, Card, Badge } from 'react-bootstrap';
 import "../App.css"
 
 function Owner() {
-    function ownerClicked() {
-        //페이지 전환
-    }
     return (
         <Card style={{ width: '750px', display: 'block', marginLeft: '50px', marginTop: '50px', border: 'none'}}>
             <a href="#mypage">

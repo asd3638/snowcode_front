@@ -1,11 +1,17 @@
 import { Card, Button, ListGroup, ListGroupItem } from "react-bootstrap";
 import React from "react";
 
-class CardView extends React.Component {
-  render() {
+function CardView() {
     return (
       <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
+        <div style={{float: 'left'}}>
+          <Card.Img
+          variant="top" 
+          alt=""
+          src={require("../Assets/python.jpg").default}
+          width="100"
+          height="150" />
+        </div>
         <Card.Body>
           <Card.Title>파이썬 공부</Card.Title>
           <Card.Text>
@@ -13,20 +19,12 @@ class CardView extends React.Component {
               <ListGroupItem>분류: 스터디</ListGroupItem>
               <ListGroupItem>기간: 2020/07/07 ~ 2020/09/07</ListGroupItem>
               <ListGroupItem>총 인원: 5</ListGroupItem>
-              <ListGroupItem>
-                이런 분 원해요!
-                <ul style={{ marginTop: "10px" }}>
-                  <li>파이썬이 주 언어이신 분</li>
-                  <li>머신 러닝에 관심이 많으신 분</li>
-                </ul>
-              </ListGroupItem>
             </ListGroup>
           </Card.Text>
           <Button variant="primary">참여하기</Button>
         </Card.Body>
       </Card>
     );
-  }
 }
 
 export default CardView;

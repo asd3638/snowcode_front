@@ -4,7 +4,7 @@ import React from "react";
 class CardView extends React.Component {
   render() {
     return (
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: "18rem", position: "relative" }}>
         <Card.Link href="#first">
           <Card.Img variant="top" src="holder.js/100px180" />
           <Card.Body>
@@ -23,6 +23,11 @@ class CardView extends React.Component {
                 </ListGroupItem>
               </ListGroup>
             </Card.Text>
+            <Card.Img
+              style={{ position: "absolute", bottom: "10px", right: "10px" }}
+              variant="bottom"
+              src="/Users/abi/Desktop/snowcode_front/src/Assets/painted_heart_icon.png/40px40"
+            />
           </Card.Body>
         </Card.Link>
       </Card>

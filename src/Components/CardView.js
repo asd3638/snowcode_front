@@ -26,7 +26,7 @@ class CardView extends React.Component {
             <Card.Img
               style={{ position: "absolute", bottom: "10px", right: "10px" }}
               variant="bottom"
-              src="/Users/abi/Desktop/snowcode_front/src/Assets/painted_heart_icon.png/40px40"
+              src="/Users/abi/Desktop/snowcode_front/public/fillheart.png/40px40"
             />
           </Card.Body>
         </Card.Link>

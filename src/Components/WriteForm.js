@@ -1,137 +1,109 @@
-//npm install react-bootstrap-date-picker
-//npm i react-hook-form
-//npm install react-bootstrap-validation --save
-import React, { useState } from "react";
-import DatePicker, { registerLocale } from "react-datepicker";
-import { getYear, getMonth } from "date-fns";
-import ko from "date-fns/locale/ko";
+import React, { Component } from "react";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
+import Calendar from "../Components/Calendar";
 
-registerLocale("ko", ko);
-const _ = require("lodash");
+class WriteForm extends Component {
+  state = {
+    category: "",
+    title: "",
+    number: "",
+    date: "",
+    explain: "",
+  };
 
-function WriteForm() {
-  const [startDate, setStartDate] = useState(new Date());
-  const years = _.range(1990, getYear(new Date()) + 1, 1);
-  const months = [
-    "1월",
-    "2월",
-    "3월",
-    "4월",
-    "5월",
-    "6월",
-    "7월",
-    "8월",
-    "9월",
-    "10월",
-    "11월",
-    "12월",
-  ];
+  onChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+    console.log(
+      this.state.category + "," + this.state.title + "," + this.state.explain
+    );
+  };
 
-  return (
-    <Form>
-      <FloatingLabel controlId="floatingSelect" label="Category">
-        <Form.Select aria-label="Floating label select example">
-          <option>카테고리</option>
-          <option value="1">프로그래밍 언어</option>
-          <option value="2">프로젝트</option>
-          <option value="3">알고리즘</option>
-        </Form.Select>
-      </FloatingLabel>
+  onChangeCategory() {
+    console.log(this.state.value);
+    this.setState({
+      category: this.state.value,
+    });
+  }
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>제목</Form.Label>
-        <Form.Control type="email" placeholder="내용을 입력해주세요" />
-      </Form.Group>
+  onChangeNumber() {
+    console.log(this.state.value);
+    this.setState({
+      number: this.state.value,
+    });
+  }
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>모집 인원</Form.Label>
-        <Form.Select aria-label="Floating label select example">
-          <option>모집인원</option>
-          <option value="1">프로그래밍 언어</option>
-          <option value="2">프로젝트</option>
-          <option value="3">알고리즘</option>
-        </Form.Select>
-      </Form.Group>
+  onSubmit = () => {
+    alert("글이 성공적으로 생성되었습니다.");
+  };
 
-      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-        <Form.Label>모집 기한</Form.Label>
-        <DatePicker
-          renderCustomHeader={({
-            date,
-            changeYear,
-            changeMonth,
-            decreaseMonth,
-            increaseMonth,
-            prevMonthButtonDisabled,
-            nextMonthButtonDisabled,
-          }) => (
-            <div
-              style={{
-                margin: 10,
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <button
-                onClick={decreaseMonth}
-                disabled={prevMonthButtonDisabled}
-              >
-                {"<"}
-              </button>
-              <select
-                value={getYear(date)}
-                onChange={({ target: { value } }) => changeYear(value)}
-              >
-                {years.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+  render() {
+    return (
+      <Form style={{ width: "300px" }}>
+        <FloatingLabel controlId="floatingSelect" label="Category">
+          <Form.Select
+            onChange={this.onChangeCategory.bind(this)}
+            aria-label="Floating label select example"
+          >
+            <option>카테고리</option>
+            <option name="category" value="language">
+              프로그래밍 언어
+            </option>
+            <option name="category" value="project">
+              프로젝트
+            </option>
+            <option name="category" value="algorithm">
+              알고리즘
+            </option>
+          </Form.Select>
+        </FloatingLabel>
 
-              <select
-                value={months[getMonth(date)]}
-                onChange={({ target: { value } }) =>
-                  changeMonth(months.indexOf(value))
-                }
-              >
-                {months.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>제목</Form.Label>
+          <Form.Control
+            name="title"
+            type="text"
+            placeholder="내용을 입력해주세요"
+            value={this.state.title}
+            onChange={this.onChange}
+          />
+        </Form.Group>
 
-              <button
-                onClick={increaseMonth}
-                disabled={nextMonthButtonDisabled}
-              >
-                {">"}
-              </button>
-            </div>
-          )}
-          selected={startDate}
-          dateFormat={"yyyy-MM-dd"}
-          locale={ko}
-          onChange={(date) => setStartDate(date)}
-        />
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>모집 인원</Form.Label>
+          <Form.Select
+            onChange={this.onChangeNumber.bind(this)}
+            aria-label="Floating label select example"
+          >
+            <option>모집인원</option>
+            <option value="1">1명</option>
+            <option value="2">2명</option>
+            <option value="3">3명</option>
+            <option value="4">4명</option>
+          </Form.Select>
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>설명</Form.Label>
-        <Form.Control
-          as="textarea"
-          placeholder="내용을 입력해주세요"
-          style={{ height: "100px" }}
-        />
-      </Form.Group>
+        <Calendar />
 
-      <Button variant="primary" type="submit">
-        확인
-      </Button>
-    </Form>
-  );
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>설명</Form.Label>
+          <Form.Control
+            name="explain"
+            as="textarea"
+            placeholder="내용을 입력해주세요"
+            style={{ height: "100px" }}
+            value={this.state.explain}
+            onChange={this.onChange}
+          />
+        </Form.Group>
+
+        <Button onClick={this.onSubmit} variant="primary" type="submit">
+          확인
+        </Button>
+      </Form>
+    );
+  }
 }
 
 export default WriteForm;

@@ -5,18 +5,20 @@ import StudyDMList from "../Components/StudyDMList";
  
 const MyPage = () => {
   return (
-      <div>
-        <Header/>
-        <div style={{float:'left'}}>
-          <User />
-        </div>
-        <div style={{float:'right',
-          marginRight:'100px',
-          marginTop:'40px',
-          }}>
-          <StudyDMList />
-        </div>
-      </div>
+    <>
+    <div>
+      <Header/>
+    </div>
+          <div style={{position:'absolute', left:'0px'}}>
+            <User />
+          </div>
+          <div style={{position:'absolute', right:'0px',
+            marginRight:'100px',
+            marginTop:'40px',
+            }}>
+            <StudyDMList />
+    </div>
+    </>
   );
 };
 export default MyPage;

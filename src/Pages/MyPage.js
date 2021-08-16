@@ -23,7 +23,6 @@ function MyPage(props) {
       };
       fetchUser();
   }, []);
-  console.log(user);
 
   return (
       <div>

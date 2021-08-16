@@ -1,5 +1,7 @@
 import { Container, Nav, Navbar, NavDropdown, Button, Popover, OverlayTrigger } from 'react-bootstrap'
 import React, {useState, useEffect} from 'react'
+import Modal from './Modal.js';
+import StudyForm from './modal/StudyForm.js';
 import api from '../Api/api'
 
 const popover = (
@@ -15,6 +17,7 @@ const popover = (
 
 function Header (props) {
     const [user, setUser] = useState({});
+    const [modal, setModal] = useState({});
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -51,51 +54,66 @@ function Header (props) {
             console.log(err);
         }
     }
+    const openModal = () => {
+      setModal({modalOpen: true})
+    }
+    const closeModal = () => {
+      setModal({ modalOpen: false })
+    }
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Container>
-                <Navbar.Brand href={"/main?id=" + user.id}>
-                    <img
-                        alt=""
-                        src={require("../Assets/main_logo.png").default}
-                        width="30"
-                        height="30"
-                    />{' '}
-                    snowcode
-                    </Navbar.Brand>
-                    <br/>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="me-auto">
-                        <Nav.Link href={"/main?id=" + user.id}>Home</Nav.Link>
-                        <Nav.Link href={"/mypage?id=" + user.id}>MyPage</Nav.Link>
-                        <NavDropdown title="category" id="collasible-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">스터디</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">공모전</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">졸업작품</NavDropdown.Item>
-                        </NavDropdown>
+        <div>
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Container>
+                    <Navbar.Brand href={"/main?id=" + user.id}>
+                        <img
+                            alt=""
+                            src={require("../Assets/main_logo.png").default}
+                            width="30"
+                            height="30"
+                        />{' '}
+                        snowcode
+                        </Navbar.Brand>
+                        <br/>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                            <Nav.Link href={"/main?id=" + user.id}>Home</Nav.Link>
+                            <Nav.Link href={"/mypage?id=" + user.id}>MyPage</Nav.Link>
+                            <NavDropdown title="category" id="collasible-nav-dropdown">
+                                <NavDropdown.Item href="#action/3.1">스터디</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.2">공모전</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.3">졸업작품</NavDropdown.Item>
+                            </NavDropdown>
+                            </Nav>
+                        <Nav>
+                            <Nav.Link href={"/mypage?id=" + user.id}>
+                                <img
+                                    alt=""
+                                    src={require("../Assets/main_women.png").default}
+                                    width="30"
+                                    height="30"
+                                    href={"/mypage?id=" + user.id}
+                                />{' '}{user.nick}
+                                </Nav.Link>
+                            <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
+                                <Nav.Link>About</Nav.Link>
+                            </OverlayTrigger>
                         </Nav>
-                    <Nav>
-                        <Nav.Link href={"/mypage?id=" + user.id}>
-                            <img
-                                alt=""
-                                src={require("../Assets/main_women.png").default}
-                                width="30"
-                                height="30"
-                                href={"/mypage?id=" + user.id}
-                            />{' '}{user.nick}
-                            </Nav.Link>
-                        <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
-                            <Nav.Link>About</Nav.Link>
-                        </OverlayTrigger>
-                    </Nav>
-                    <Nav>
-                        <Button variant="light" onClick={handleLogout}>로그아웃</Button>
-                        <Button style={{marginLeft: '10px'}} variant="light">글쓰기</Button>
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+                        <Nav>
+                            <Button variant="light" onClick={handleLogout}>로그아웃</Button>
+                            <Button style={{marginLeft: '10px'}} variant="light" onClick={openModal}>글쓰기</Button>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+            <Modal open={modal.modalOpen}>
+              <StudyForm
+                txt="studyform"
+                close={closeModal}>
+              </StudyForm>
+            </Modal>
+        </div>
+        
     );
 }   
 

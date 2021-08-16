@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
-import Calendar from "../Components/Calendar";
+import Calendar from "../Calendar";
 
 class StudyForm extends Component {
   state = {
@@ -31,7 +31,20 @@ class StudyForm extends Component {
     alert("글이 성공적으로 생성되었습니다.");
   };
 
+  handleEdit = () => {
+    const close=this.props.close
+    if (true) {close()}
+    const onUpdate = this.props.onUpdate;
+    const newimg = this.state.img;
+    const newinfo = this.state.info;
+    const newmajor = this.state.major;
+    const newgithub = this.state.github;
+    onUpdate(newimg,newinfo, newmajor, newgithub);
+  }
+
   render() {
+    const close=this.props.close;
+    
     return (
       <Form style={{ width: "300px" }}>
         <FloatingLabel controlId="floatingSelect" label="Category">
@@ -91,8 +104,12 @@ class StudyForm extends Component {
           />
         </Form.Group>
 
-        <Button onClick={this.onSubmit} variant="primary" type="submit">
-          확인
+        <Button variant="outline-primary" type="submit" onClick = {this.handleEdit} >
+        수정
+        </Button>
+        &nbsp; &nbsp; 
+        <Button variant="outline-primary" type="submit" onClick={close}>
+          취소
         </Button>
       </Form>
     );

@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import {Card,Col,Image, Button} from 'react-bootstrap';
 
 class Profile extends Component {
+  handleOut = (e) => {
+    alert("정말로 탈퇴하시겠습니까?")
+  }
   render() {
     // props로 받아온 랜더링 된 값을 프로필 컴포넌트 내역에 나타낸다
     const {img,info, major,github,open}=this.props
-
     return (
       <div>
         <Card style={{
@@ -27,6 +29,7 @@ class Profile extends Component {
             </Col>
             <br/>
             <Button onClick={open} variant="outline-primary">회원 정보 수정</Button>{''}
+            <div onClick={this.handleOut}>회원탈퇴</div>
             <br/><br/>
             <div>
             <Card.Header>본인 소개</Card.Header>

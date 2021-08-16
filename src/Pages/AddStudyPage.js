@@ -5,7 +5,7 @@ import StudyForm from "../Components/StudyForm";
 const LoginPage = () => {
   return (
     <div>
-        <Header/>
+        <Header id={3}/>
         <StudyForm/>
     </div>
   );

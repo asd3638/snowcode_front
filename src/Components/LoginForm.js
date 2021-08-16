@@ -39,8 +39,9 @@ function LoginForm() {
                 document.location.href = '/'
             } else if(res.data.email === inputEmail) {
                 // id, pw 모두 일치 userId = userId1, msg = undefined
-                sessionStorage.setItem('user_id', res.data);
-                document.location.href = '/main'
+                sessionStorage.setItem('user_id',res.data.id);
+                const id = res.data.id;
+                document.location.href = `/main?id=${id}`
             }
         })
         .catch()

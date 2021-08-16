@@ -2,15 +2,17 @@ import React from "react";
 import Header from '../Components/Header';
 import CardView from '../Components/CardView';
  
-const MainPage = () => {
-  console.log(window.sessionStorage.getItem('user_id'));
-  // alert('등록된 사용자 정보가 없습니다. 아이디와 비밀번호를 확인하세요.');
-  // document.location.href = '/';
-  return (
-    <div>
-      <Header/>
-      <CardView/>
-    </div>
-  );
+class MainPage extends React.Component {
+  render() {
+    const search = this.props.location.search;
+    const params = new URLSearchParams(search);
+    const idFromUrl = params.get('id');
+    return (
+      <div>
+        <Header id={idFromUrl}/>
+        <CardView/>
+      </div>
+    );
+  }
 };
 export default MainPage;

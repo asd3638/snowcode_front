@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
-import Calendar from "../Components/Calendar";
 
 class StudyForm extends Component {
   state = {
@@ -76,8 +75,6 @@ class StudyForm extends Component {
             <option value="4">4명</option>
           </Form.Select>
         </Form.Group>
-
-        <Calendar />
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>설명</Form.Label>

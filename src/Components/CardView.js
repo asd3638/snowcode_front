@@ -8,9 +8,9 @@ function CardView(props) {
       getdisplay()
   }
   return (
-    <Card id="card" style={{display:'block', width:'16em',}}>
+    <Card id="card" style={{display:'block', width: '20rem'}}>
         <Card.Link href="#first" style={{textDecoration:'none', position:'relative',}}>
-          <div style={{float: 'left'}}>
+          <div>
             <Card.Img
             variant="top" 
             alt=""

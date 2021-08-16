@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Form, Row, Col, Button} from 'react-bootstrap';
 
-class ModalForms extends Component {
+class UserForm extends Component {
   
   // props로 App.js의 state 값을 받아온다
   state = {
@@ -56,72 +56,65 @@ class ModalForms extends Component {
 
     return (
       <div>
-        <Form name="폼 이름" method="post" action="애플리케이션 주소">
-          <Row>
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>프로필 사진</Form.Label>
-              <Form.Control 
-              name="img" 
-              type="file" 
-              accept='image/jpg,impge/png,image/jpeg,image/gif'
-              onChange={this.handleFileOnChange} />
-            </Form.Group>
-            <Form.Label column lg={4}>
-              본인 소개
-            </Form.Label>
-            <Col>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-              <Form.Control as="textarea" rows={3} name="info" value={this.state.info}
-               onChange = {this.handleChange}  placeholder='본인소개'/>
-            </Form.Group>
-            </Col>
-          </Row>
-          <br />
-          <Row>
-            <Form.Label column lg={4}>
-              학부
-            </Form.Label>
-            <Col>
-              <Form.Control 
-               name="major"
-               value={this.state.major}
-               onChange = {this.handleChange} 
-               type="text" 
-               placeholder='학부' />
-            </Col>
-          </Row>
-          <br />
-          <Row>
-            <Form.Label column lg={4}>
-              깃헙 주소
-            </Form.Label>
-            <Col>
-              <Form.Control  
-              name="github" 
-              value={this.state.github}
-              onChange = {this.handleChange}  
-              type="text" 
-              placeholder='깃허브 주소' />
-            </Col>
-          </Row>
-        </Form>
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;
-        <Button variant="outline-primary" type="submit" onClick = {this.handleEdit} >
-        수정
-        </Button>
-        &nbsp; &nbsp; 
-        <Button variant="outline-primary" type="submit" onClick={close}>
-          취소
-        </Button>
+          <h5 style={{textAlign: "center"}}>회원정보 수정</h5><br/>
+            <Form name="폼 이름" method="post" action="애플리케이션 주소">
+            <Row>
+                <Form.Group controlId="formFile" className="mb-3">
+                <Form.Label>프로필 사진</Form.Label>
+                <Form.Control 
+                name="img" 
+                type="file" 
+                accept='image/jpg,impge/png,image/jpeg,image/gif'
+                onChange={this.handleFileOnChange} />
+                </Form.Group>
+                <Form.Label column lg={4}>
+                본인 소개
+                </Form.Label>
+                <Col>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                <Form.Control as="textarea" rows={3} name="info" value={this.state.info}
+                onChange = {this.handleChange}  placeholder='본인소개'/>
+                </Form.Group>
+                </Col>
+            </Row>
+            <br />
+            <Row>
+                <Form.Label column lg={4}>
+                학부
+                </Form.Label>
+                <Col>
+                <Form.Control 
+                name="major"
+                value={this.state.major}
+                onChange = {this.handleChange} 
+                type="text" 
+                placeholder='학부' />
+                </Col>
+            </Row>
+            <br />
+            <Row>
+                <Form.Label column lg={4}>
+                깃헙 주소
+                </Form.Label>
+                <Col>
+                <Form.Control  
+                name="github" 
+                value={this.state.github}
+                onChange = {this.handleChange}  
+                type="text" 
+                placeholder='깃허브 주소' />
+                </Col>
+            </Row>
+            </Form>
+            <Button variant="outline-primary" type="submit" onClick = {this.handleEdit} >
+            수정
+            </Button>
+            <Button variant="outline-primary" type="submit" onClick={close}>
+            취소
+            </Button>
       </div>
     );
   }
 }
 
-export default ModalForms;
+export default UserForm;

@@ -62,7 +62,7 @@ function Header (props) {
     }
     return (
         <div>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{height: "70px"}}>
                 <Container>
                     <Navbar.Brand href={"/main?id=" + user.id}>
                         <img

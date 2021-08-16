@@ -1,9 +1,7 @@
 import React, { Component} from 'react';
 import {Tabs, Tab} from 'react-bootstrap';
-import UserCard from './UserCard';
 
 class StudyDMList extends Component {
-
   state= {
     display: true
   }
@@ -24,10 +22,9 @@ class StudyDMList extends Component {
         <Tabs defaultActiveKey="study" id="uncontrolled-tab-example" className="mb-3" 
         style={{borderColor: 'grey'}}>
           <Tab eventKey="study" title="내가 찜한 스터디" style={{color: 'black', display: 'flex',flexWrap: 'wrap'}}>
-          {display ? <UserCard getdisplay={this.getdisplay}></UserCard> : null}
           </Tab>
           <Tab eventKey="DMlist" title="DM 목록">
-            <div>asdfasdf</div>
+            <div>dm목록</div>
           </Tab>
         </Tabs>
       </div>

@@ -1,5 +1,6 @@
 import { Container, Nav, Navbar, NavDropdown, Button, Popover, OverlayTrigger } from 'react-bootstrap'
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import api from '../Api/api'
 
 const popover = (
     <Popover id="popover-basic">
@@ -12,55 +13,90 @@ const popover = (
     </Popover>
 );
 
-class Header extends React.Component {
-    render() {
-        return (
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Container>
-                    <Navbar.Brand href="#home">
-                        <img
-                            alt=""
-                            src={require("../Assets/main_logo.png").default}
-                            width="30"
-                            height="30"
-                        />{' '}
-                        snowcode</Navbar.Brand>
-                        <br/>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="me-auto">
-                            <Nav.Link href="#home">Home</Nav.Link>
-                            <Nav.Link href="#mypage">MyPage</Nav.Link>
-                            <Nav.Link href="#chat">Chat</Nav.Link>
-                            <NavDropdown title="category" id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">스터디</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">공모전</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">졸업작품</NavDropdown.Item>
-                            </NavDropdown>
-                            </Nav>
-                        <Nav>
-                            <Nav.Link href="#mypage">
-                                <img
-                                    alt=""
-                                    src={require("../Assets/main_women.png").default}
-                                    width="30"
-                                    height="30"
-                                    href="#mypage"
-                                />{' '}
-                                User Name</Nav.Link>
-                            <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
-                                <Nav.Link>About</Nav.Link>
-                            </OverlayTrigger>
-                        </Nav>
-                        <Nav>
-                            <Button variant="light">로그인</Button>
-                            <Button style={{marginLeft: '10px'}}variant="light">글쓰기</Button>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-        );
+function Header (props) {
+    const [user, setUser] = useState({});
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                setUser(null);
+                setLoading(true);
+                const response = await api.get(
+                `/user/${props.id}`
+                );
+                setUser(response.data); // 데이터는 response.data 안에 들어있습니다.
+            } catch (e) {
+            }
+        setLoading(false);
+        };
+        fetchUser();
+    }, []);
+
+    if (loading) return <div>로딩중..</div>;
+
+    const handleLogout = async () => {
+        try {
+            await api({
+                method: 'GET',
+                url: '/auth/logout',
+            })
+            .then(res => {
+                console.log(res.data);
+                sessionStorage.removeItem('user_id');
+                document.location.href = `/`
+            })
+            .catch(err => console.log(err));
+        } catch(err) {
+            console.log(err);
+        }
     }
+    return (
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Container>
+                <Navbar.Brand href="#home">
+                    <img
+                        alt=""
+                        src={require("../Assets/main_logo.png").default}
+                        width="30"
+                        height="30"
+                    />{' '}
+                    snowcode
+                    </Navbar.Brand>
+                    <br/>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="me-auto">
+                        <Nav.Link href={"/main?id=" + user.id}>Home</Nav.Link>
+                        <Nav.Link href="#mypage">MyPage</Nav.Link>
+                        <NavDropdown title="category" id="collasible-nav-dropdown">
+                            <NavDropdown.Item href="#action/3.1">스터디</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.2">공모전</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.3">졸업작품</NavDropdown.Item>
+                        </NavDropdown>
+                        </Nav>
+                    <Nav>
+                        <Nav.Link href="#mypage">
+                            <img
+                                alt=""
+                                src={require("../Assets/main_women.png").default}
+                                width="30"
+                                height="30"
+                                href="#mypage"
+                            />{' '}{user.nick}
+                            </Nav.Link>
+                        <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
+                            <Nav.Link>About</Nav.Link>
+                        </OverlayTrigger>
+                    </Nav>
+                    <Nav>
+                        <Button variant="light" onClick={handleLogout}>로그아웃</Button>
+                        <Button style={{marginLeft: '10px'}} variant="light">글쓰기</Button>
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
+    );
 }   
 
 export default Header;

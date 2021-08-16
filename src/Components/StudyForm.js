@@ -1,6 +1,3 @@
-//npm install react-bootstrap-date-picker
-//npm i react-hook-form
-//npm install react-bootstrap-validation --save
 import React, { useState } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import { getYear, getMonth } from "date-fns";

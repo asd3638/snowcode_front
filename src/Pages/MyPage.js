@@ -3,22 +3,17 @@ import User from '../Components/User';
 import Header from '../Components/Header'
 import StudyDMList from "../Components/StudyDMList";
  
-const MyPage = () => {
-  return (
-    <>
-    <div>
-      <Header/>
-    </div>
-          <div style={{position:'absolute', left:'0px'}}>
-            <User />
-          </div>
-          <div style={{position:'absolute', right:'0px',
-            marginRight:'100px',
-            marginTop:'40px',
-            }}>
-            <StudyDMList />
-    </div>
-    </>
-  );
+class MyPage extends React.Component {
+  render() {
+    const search = this.props.location.search;
+    const params = new URLSearchParams(search);
+    const idFromUrl = params.get('id');
+    return (
+        <div>
+          <Header id={idFromUrl}/>
+          <User/>
+        </div>
+    );
+  }
 };
 export default MyPage;

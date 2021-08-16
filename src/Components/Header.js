@@ -20,9 +20,7 @@ function Header (props) {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                // 요청이 시작 할 때에는 error 와 users 를 초기화하고
                 setUser(null);
-                // loading 상태를 true 로 바꿉니다.
                 setLoading(true);
                 const response = await api.get(
                 `/user/${props.id}`
@@ -36,6 +34,23 @@ function Header (props) {
     }, []);
 
     if (loading) return <div>로딩중..</div>;
+
+    const handleLogout = async () => {
+        try {
+            await api({
+                method: 'GET',
+                url: '/auth/logout',
+            })
+            .then(res => {
+                console.log(res.data);
+                sessionStorage.removeItem('user_id');
+                document.location.href = `/`
+            })
+            .catch(err => console.log(err));
+        } catch(err) {
+            console.log(err);
+        }
+    }
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
@@ -52,7 +67,7 @@ function Header (props) {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
+                        <Nav.Link href={"/main?id=" + user.id}>Home</Nav.Link>
                         <Nav.Link href="#mypage">MyPage</Nav.Link>
                         <NavDropdown title="category" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">스터디</NavDropdown.Item>
@@ -75,8 +90,8 @@ function Header (props) {
                         </OverlayTrigger>
                     </Nav>
                     <Nav>
-                        <Button variant="light">로그아웃</Button>
-                        <Button style={{marginLeft: '10px'}}variant="light">글쓰기</Button>
+                        <Button variant="light" onClick={handleLogout}>로그아웃</Button>
+                        <Button style={{marginLeft: '10px'}} variant="light">글쓰기</Button>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

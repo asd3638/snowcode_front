@@ -70,12 +70,10 @@ class ModalForms extends Component {
               본인 소개
             </Form.Label>
             <Col>
-              <Form.Control 
-              name="info"
-              value={this.state.info}
-              onChange = {this.handleChange}  
-              type="text" 
-              placeholder='본인소개'/>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+              <Form.Control as="textarea" rows={3} name="info" value={this.state.info}
+               onChange = {this.handleChange}  placeholder='본인소개'/>
+            </Form.Group>
             </Col>
           </Row>
           <br />
@@ -108,11 +106,17 @@ class ModalForms extends Component {
           </Row>
         </Form>
         <br />
-        <Button variant="primary" type="submit" onClick = {this.handleEdit} >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
+        <Button variant="outline-primary" type="submit" onClick = {this.handleEdit} >
         수정
         </Button>
         &nbsp; &nbsp; 
-        <Button variant="primary" type="submit" onClick={close}>
+        <Button variant="outline-primary" type="submit" onClick={close}>
           취소
         </Button>
       </div>

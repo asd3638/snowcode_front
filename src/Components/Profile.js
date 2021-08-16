@@ -8,19 +8,20 @@ class Profile extends Component {
 
     return (
       <div>
-        <Card border="dark" 
-        style={{ width:'300px',
-        height: 'auto',
-        position: 'relative',
-        textAlign: 'center',
-        margin:'20px',
-        borderWidth: '1.2px'
+        <Card style={{
+          width: "500px",
+          display: "block",
+          marginLeft: "50px",
+          marginTop: "70px",
+          marginRight: "50px",
+          border: "none",
+          textAlign: "center"
        }}>
-          <Card.Header>내 프로필</Card.Header>
+          <Card.Header style={{border: "none"}}>프로필</Card.Header>
           <Card.Body>
             <Card.Text >
             <Col xs={0} md={0}>
-              <Image width='200px' height='200px' src={img} roundedCircle 
+              <Image width='150px' height='150px' src={img} roundedCircle 
               style={{
               backgroundPositon: 'center'}}/>
             </Col>
@@ -29,7 +30,7 @@ class Profile extends Component {
             <br/><br/>
             <div>
             <Card.Header>본인 소개</Card.Header>
-            <Card.Text style={{textAlign: 'left'}}><br/>{info}<br/><br/></Card.Text>
+            <Card.Text><br/>{info}<br/><br/></Card.Text>
             </div>
             <div>
             <Card.Header>학부</Card.Header>

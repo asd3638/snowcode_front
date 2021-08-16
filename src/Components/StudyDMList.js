@@ -5,19 +5,22 @@ class StudyDMList extends Component {
   state= {
     display: true
   }
-
   getdisplay = () => {
     this.setState({
       display : !this.state.display
     })
   }
-
   render() {
     const {display} = this.state
     return (
       <div style={{
-        width: '1000px',
-        height: 'auto'
+        width: "auto",
+        display: "block",
+        marginLeft: "50px",
+        marginTop: "70px",
+        marginRight: "50px",
+        border: "none",
+        textAlign: "center"
       }}>
         <Tabs defaultActiveKey="study" id="uncontrolled-tab-example" className="mb-3" 
         style={{borderColor: 'grey'}}>

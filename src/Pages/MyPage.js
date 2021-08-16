@@ -11,8 +11,15 @@ class MyPage extends React.Component {
     return (
         <div>
           <Header id={idFromUrl}/>
-          <User/>
-        </div>
+          <div style={{display: 'block'}}>
+              <div style={{float: 'left'}}>
+                  <User/>
+              </div>
+              <div style={{float: 'left'}}>
+                  <StudyDMList/>
+              </div>
+          </div>
+      </div>
     );
   }
 };

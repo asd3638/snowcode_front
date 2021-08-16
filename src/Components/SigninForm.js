@@ -6,19 +6,15 @@ import "../App.css"
 function SigninForm() {
     const [inputEmail, setInputEmail] = useState('');
     const [inputPw, setInputPw] = useState('');
-
     const handleInputEmail = (e) => {
         setInputEmail(e.target.value)
     }
- 
     const handleInputPw = (e) => {
         setInputPw(e.target.value)
     }
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        console.log('click login')
-        console.log('ID : ', inputEmail)
-        console.log('PW : ', inputPw)
+
         api.post('auth/join', {
             email: inputEmail,
             password: inputPw
@@ -33,6 +29,10 @@ function SigninForm() {
             }
         })
         .catch()
+    }
+    const handleCancel = () => {
+        alert('회원가입을 취소하였습니다.')
+        document.location.href = '/';
     }
     return (
         <Card className="signinCard">
@@ -52,7 +52,7 @@ function SigninForm() {
                         <Button variant="outline-primary" size="sm" type="submit">
                             가입하기
                         </Button>
-                        <Button style={{marginLeft: '10px'}} variant="outline-primary" size="sm" type="submit">
+                        <Button style={{marginLeft: '10px'}} variant="outline-primary" size="sm" onClick={handleCancel}>
                             취소
                         </Button>
                     </div>

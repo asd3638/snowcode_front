@@ -6,7 +6,7 @@ import Comment from '../Components/Comment'
 const MainPage = () => {
   return (
     <div>
-        <Header/>
+        <Header id={3}/>
         <div style={{display: 'block'}}>
             <div style={{float: 'left'}}>
                 <div>

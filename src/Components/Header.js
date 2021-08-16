@@ -54,7 +54,7 @@ function Header (props) {
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href={"/main?id=" + user.id}>
                     <img
                         alt=""
                         src={require("../Assets/main_logo.png").default}
@@ -68,7 +68,7 @@ function Header (props) {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href={"/main?id=" + user.id}>Home</Nav.Link>
-                        <Nav.Link href="#mypage">MyPage</Nav.Link>
+                        <Nav.Link href={"/mypage?id=" + user.id}>MyPage</Nav.Link>
                         <NavDropdown title="category" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">스터디</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">공모전</NavDropdown.Item>
@@ -76,13 +76,13 @@ function Header (props) {
                         </NavDropdown>
                         </Nav>
                     <Nav>
-                        <Nav.Link href="#mypage">
+                        <Nav.Link href={"/mypage?id=" + user.id}>
                             <img
                                 alt=""
                                 src={require("../Assets/main_women.png").default}
                                 width="30"
                                 height="30"
-                                href="#mypage"
+                                href={"/mypage?id=" + user.id}
                             />{' '}{user.nick}
                             </Nav.Link>
                         <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>

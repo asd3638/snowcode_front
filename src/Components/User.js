@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from './Modal.js';
 import UserForm from './modal/UserForm.js';
-import Profile from './Profile.js';
+import {Card, Image, Button} from 'react-bootstrap';
 
 export class User extends React.Component {
   // modal 창 열고 닫기
@@ -15,10 +15,7 @@ export class User extends React.Component {
       this.setState({ modalOpen: false })
     }
     state={
-      img:'./profile.jpg',
-      info:'',
-      major:'',
-      github: ''
+      user: this.props.user
     }
     handleUpdate = (newimg,newinfo, newmajor, newgithub) => {
       this.setState({
@@ -33,28 +30,52 @@ export class User extends React.Component {
     }
 
     render() {
-        return (
-          <>
-            <Profile
-              img={this.state.img}
-              info={this.state.info}
-              major={this.state.major}
-              github={this.state.github}
-              onUpdate = {this.handleUpdate}
-              open={ this.openModal }
-            ></Profile>
-            <Modal open={ this.state.modalOpen }>
-              <UserForm
-                img={this.state.img}
-                info={this.state.info}
-                major={this.state.major}
-                github={this.state.github}
-                onUpdate = {this.handleUpdate}
-                close={ this.closeModal }>
-              </UserForm>
-            </Modal>
-          </>
-        )
+      return (
+        <>
+          <Card style={{
+            width: "500px",
+            display: "block",
+            marginLeft: "50px",
+            marginTop: "70px",
+            marginRight: "50px",
+            border: "none",
+            textAlign: "center"
+          }}>
+            <Card.Header>프로필</Card.Header>
+            <Card.Body>
+              <Card.Text >
+                <Image width='150px' height='150px' src={this.state.user.img == null ? './profile.jpg' : this.state.user.img} roundedCircle 
+                style={{
+                backgroundPositon: 'center'}}/>
+              <br/>
+              <Button onClick={this.openModal} variant="outline-primary">회원 정보 수정</Button>{''}
+              <br/><br/>
+              <div>
+              <Card.Header>닉네임</Card.Header>
+              <Card.Text><br/>{this.state.user.nick}<br/><br/></Card.Text>
+              </div>
+              <div>
+              <Card.Header>본인 소개</Card.Header>
+              <Card.Text><br/>{this.state.user.info}<br/><br/></Card.Text>
+              </div>
+              <div>
+              <Card.Header>학부</Card.Header>
+              <Card.Text ><br/>{this.state.user.major}<br/><br/></Card.Text>
+              </div>
+              <div>
+              <Card.Header>깃헙 주소</Card.Header>
+              <Card.Text ><br/>{this.state.user.github}<br/><br/></Card.Text>
+              </div>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          <Modal open={ this.state.modalOpen }>
+            <UserForm
+              user={this.state.user}>
+            </UserForm>
+          </Modal>
+        </>
+      )
     }
 }
 

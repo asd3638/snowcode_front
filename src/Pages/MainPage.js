@@ -4,6 +4,7 @@ import CardView from '../Components/CardView';
 import { Row, Col, Card } from "react-bootstrap";
  
 class MainPage extends React.Component {
+  
   render() {
     const search = this.props.location.search;
     const params = new URLSearchParams(search);

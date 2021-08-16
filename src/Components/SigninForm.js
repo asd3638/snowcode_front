@@ -6,18 +6,23 @@ import "../App.css"
 function SigninForm() {
     const [inputEmail, setInputEmail] = useState('');
     const [inputPw, setInputPw] = useState('');
+    const [inputNick, setNick] = useState('');
     const handleInputEmail = (e) => {
         setInputEmail(e.target.value)
     }
     const handleInputPw = (e) => {
         setInputPw(e.target.value)
     }
+    const handleInputNick = (e) => {
+        setNick(e.target.value)
+    }
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
         api.post('auth/join', {
             email: inputEmail,
-            password: inputPw
+            password: inputPw,
+            nick: inputNick
         })
         .then(res => {
             if(res.data === "already exist"){
@@ -45,9 +50,15 @@ function SigninForm() {
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword" value={inputPw} onChange={handleInputPw}>
+                        <Form.Label>닉네임</Form.Label>
+                        <Form.Control type="text" placeholder="Enter nickname" value={inputNick} onChange={handleInputNick}/>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicPassword" value={inputPw} onChange={handleInputPw}>
                         <Form.Label>비밀번호</Form.Label>
                         <Form.Control type="password" placeholder="Password" />
                     </Form.Group>
+
                     <div style={{marginLeft: "150px"}}>
                         <Button variant="outline-primary" size="sm" type="submit">
                             가입하기

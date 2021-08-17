@@ -1,3 +1,4 @@
+//npm i css-loader
 import React, { Component } from "react";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
 

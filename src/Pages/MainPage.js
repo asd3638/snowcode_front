@@ -66,7 +66,14 @@ class MainPage extends React.Component {
           }}
         >
           {Array.from({ length: 10 }).map((_, idx) => (
-            <Col style={{ marginBottom: "25px" }}>
+            <Col
+              style={{
+                marginBottom: "25px",
+                display: "flex",
+                width: "270px",
+                flexWrap: "wrap",
+              }}
+            >
               <CardView />
             </Col>
           ))}

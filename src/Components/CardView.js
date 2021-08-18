@@ -3,6 +3,8 @@ import React from "react";
 
 function CardView(props) {
   const study = props.study;
+  const userId = props.id;
+  const isMyPage = props.isMyPage;
 
   const checkHeart = study.heart;
   const startDate = new Date(study.startLine.toString());
@@ -14,10 +16,14 @@ function CardView(props) {
   }
 
   let heart;
-  if (checkHeart) {
-    heart = <img width='40px' height= '40px' src='fillheart.jpg' alt="찜하기버튼"></img>
+  if (isMyPage) {
+    heart = <></>
   } else {
-    heart = <img width='40px' height= '40px' src='blankheart.jpg' alt="찜하기버튼"></img>;
+    if (checkHeart) {
+      heart = <img width='40px' height= '40px' src='fillheart.jpg' alt="찜버튼"></img>
+    } else {
+      heart = <img width='40px' height= '40px' src='blankheart.jpg' alt="찜 해제 버튼"></img>;
+    }
   }
 
   let cardViewImg;
@@ -48,7 +54,7 @@ function CardView(props) {
   }
   return (
     <Card id="card" style={{display:'block', width: '20rem'}}>
-        <Card.Link href="#first" style={{textDecoration:'none', position:'relative',}}>
+        <Card.Link href={"/detail?id=" + userId + "&studyId=" + study.id} style={{textDecoration:'none', position:'relative',}}>
           <div>
             {cardViewImg}
           </div>
@@ -63,7 +69,7 @@ function CardView(props) {
             </Card.Text>
           </Card.Body>
         </Card.Link>
-        <div style={{display: 'block', position:'absolute',bottom: '10px', right: '15px'}}
+        <div style={{display: 'block', width: '40px', height: '40px', position:'absolute',bottom: '10px', right: '10px'}}
           onClick={onClick}>
           {heart}
         </div>

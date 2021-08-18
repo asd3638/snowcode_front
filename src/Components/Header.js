@@ -108,7 +108,7 @@ function Header (props) {
             </Navbar>
             <Modal open={modal.modalOpen}>
               <StudyForm
-                txt="studyform"
+                userId={user.id}
                 close={closeModal}>
               </StudyForm>
             </Modal>

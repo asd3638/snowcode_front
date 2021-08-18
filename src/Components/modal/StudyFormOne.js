@@ -1,35 +1,91 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Form } from "react-bootstrap";
+import api from "../Api/api";
+import { Form, Button } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function StudyFormOne() {
-  const [category, setCategory] = useState(null);
-  const [people, setPeople] = useState(null);
+// category, title, people, startLine, deadLine, content, wanted
+function StudyForm() {
+  const [inputCategory, setInputCategory] = useState(null);
+  const [inputTitle, setInputTitle] = useState("");
+  const [inputPeople, setInputPeople] = useState(null);
+  const [inputStartLine, setInputStartLine] = useState(new Date());
+  const [inputDeadLine, setInputDeadLine] = useState(new Date());
+  const [inputContent, setInputContent] = useState("");
+  const [inputWanted, setInputWanted] = useState("");
+
+  const handleTitle = (e) => {
+    setInputTitle(e.target.value);
+  };
 
   const onCategoryHandler = (e) => {
-    setCategory(e.value);
+    setInputCategory(e.value);
     fetchCategory();
   };
 
   const onPeopleHandler = (e) => {
-    setPeople(e.value);
+    setInputPeople(e.value);
+    fetchPeople();
+  };
+
+  const onStartLineHandler = (e) => {
+    setInputStartLine(e.value);
+    fetchPeople();
+  };
+
+  const onDeadLineHandler = (e) => {
+    setInputDeadLine(e.value);
     fetchPeople();
   };
 
   const fetchCategory = async () => {
     const response = await axios("", {
-      category: category,
+      category: inputCategory,
     });
     console.log(response.data);
   };
 
   const fetchPeople = async () => {
     const response = await axios("", {
-      people: people,
+      people: inputPeople,
     });
     console.log(response.data);
+  };
+
+  const handleContent = (e) => {
+    setInputContent(e.target.value);
+  };
+
+  const handleWanted = (e) => {
+    setInputWanted(e.target.value);
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+
+    api
+      .post("auth/join", {
+        category: inputCategory,
+        title: inputTitle,
+        people: inputPeople,
+        startLine: inputStartLine,
+        deadLine: inputDeadLine,
+        content: inputContent,
+        wanted: inputWanted,
+      })
+      .then((res) => {
+        if (res.data === "success") {
+          alert("스터디가 생성되었습니다.");
+          document.location.href = "/";
+        }
+      })
+      .catch();
+  };
+
+  const handleCancel = () => {
+    alert("스터디 생성을 취소하였습니다.");
+    document.location.href = "/";
   };
 
   return (
@@ -56,6 +112,17 @@ function StudyFormOne() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>스터디명</Form.Label>
+          <Form.Control
+            name="title"
+            type="text"
+            placeholder="내용을 입력해주세요"
+            value={inputTitle}
+            onChange={handleTitle}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>모집 인원</Form.Label>
           <Form.Select
             onChange={onPeopleHandler}
@@ -73,22 +140,57 @@ function StudyFormOne() {
             <div style={{ float: "left" }}>
               <Form.Label>시작 날짜</Form.Label>
               <DatePicker
-                selected={this.state.startDate}
-                onChange={(date) => this.setStartDate(date)}
+                selected={inputStartLine}
+                onChange={(date) => onStartLineHandler(date)}
               />
             </div>
             <div style={{ float: "left" }}>
               <Form.Label>종료 날짜</Form.Label>
               <DatePicker
-                selected={this.state.endDate}
-                onChange={(date) => this.setEndDate(date)}
+                selected={inputDeadLine}
+                onChange={(date) => onDeadLineHandler(date)}
               />
             </div>
           </div>
         </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>설명</Form.Label>
+          <Form.Control
+            name="content"
+            as="textarea"
+            placeholder="내용을 입력해주세요"
+            style={{ height: "100px" }}
+            value={inputContent}
+            onChange={handleContent}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>이런분 원해요</Form.Label>
+          <Form.Control
+            name="wanted"
+            as="textarea"
+            placeholder="내용을 입력해주세요"
+            style={{ height: "100px" }}
+            value={inputWanted}
+            onChange={handleWanted}
+          />
+        </Form.Group>
+
+        <Button
+          variant="outline-primary"
+          type="submit"
+          onClick={onSubmitHandler}
+        >
+          만들기
+        </Button>
+        <Button variant="outline-primary" type="submit" onClick={handleCancel}>
+          취소
+        </Button>
       </Form>
     </div>
   );
 }
 
-export default StudyFormOne;
+export default StudyForm;

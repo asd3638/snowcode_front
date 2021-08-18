@@ -54,15 +54,9 @@ function Header (props) {
             console.log(err);
         }
     }
-    const openModal = () => {
-      setModal({modalOpen: true})
-    }
-    const closeModal = () => {
-      setModal({ modalOpen: false })
-    }
     return (
         <div>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{height: "70px"}}>
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href={"/main?id=" + user.id}>
                         <img
@@ -101,17 +95,10 @@ function Header (props) {
                         </Nav>
                         <Nav>
                             <Button variant="light" onClick={handleLogout}>로그아웃</Button>
-                            <Button style={{marginLeft: '10px'}} variant="light" onClick={openModal}>글쓰기</Button>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <Modal open={modal.modalOpen}>
-              <StudyForm
-                userId={user.id}
-                close={closeModal}>
-              </StudyForm>
-            </Modal>
         </div>
         
     );

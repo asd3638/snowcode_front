@@ -5,9 +5,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 // category, title, people, startLine, deadLine, content, wanted
-function StudyForm(props) {
+function StudyEdit(props) {
   const a = props.close;
-
   const [inputCategory, setInputCategory] = useState(props.study.category);
   const [inputTitle, setInputTitle] = useState(props.study.title);
   const [inputPeople, setInputPeople] = useState(props.study.people);
@@ -59,8 +58,8 @@ function StudyForm(props) {
       })
       .then((res) => {
         if (res.data === "success") {
-          alert("스터디가 수정되었습니다.");
-          document.location.href = `/main?id=${props.userId}`
+            alert("스터디가 수정되었습니다.");
+            document.location.href = `/detail?id=${props.study.writter}&studyId=${props.study.id}`
         }
       })
       .catch();
@@ -75,8 +74,105 @@ function StudyForm(props) {
     <div>
       <h5 style={{ textAlign: "center" }}>스터디 생성</h5>
       <br />
+      <Form style={{ width: "content" }}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>카테고리</Form.Label>
+          <Form.Select
+            onChange={onCategoryHandler}
+            aria-label="Floating label select example"
+          >
+            <option name="category" value="스터디">
+              스터디
+            </option>
+            <option name="category" value="공모전">
+              공모전
+            </option>
+            <option name="category" value="졸업작품">
+              졸업작품
+            </option>
+          </Form.Select>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>스터디명</Form.Label>
+          <Form.Control
+            name="title"
+            type="text"
+            placeholder="내용을 입력해주세요"
+            value={inputTitle}
+            onChange={handleTitle}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>모집 인원</Form.Label>
+          <Form.Select
+            onChange={onPeopleHandler}
+            aria-label="Floating label select example"
+          >
+            <option value="1">1명</option>
+            <option value="2">2명</option>
+            <option value="3">3명</option>
+            <option value="4">4명</option>
+            <option value="5">5명</option>
+            <option value="6">6명</option>
+            <option value="7">7명</option>
+            <option value="8">8명</option>
+          </Form.Select>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <div style={{ display: "flex" }}>
+            <div style={{ float: "left" }}>
+              <Form.Label>시작 날짜</Form.Label>
+              <DatePicker
+                selected={new Date()}
+                onChange={(date) => onStartLineHandler(date)}
+              />
+            </div>
+            <div style={{ float: "left" }}>
+              <Form.Label>종료 날짜</Form.Label>
+              <DatePicker
+                selected={new Date()}
+                onChange={(date) => onDeadLineHandler(date)}
+              />
+            </div>
+          </div>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>설명</Form.Label>
+          <Form.Control
+            name="content"
+            as="textarea"
+            placeholder="내용을 입력해주세요"
+            style={{ height: "100px" }}
+            value={inputContent}
+            onChange={handleContent}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>이런분 원해요</Form.Label>
+          <Form.Control
+            name="wanted"
+            as="textarea"
+            placeholder="내용을 입력해주세요"
+            style={{ height: "100px" }}
+            value={inputWanted}
+            onChange={handleWanted}
+          />
+        </Form.Group>
+
+        <Button
+          variant="outline-primary"
+          type="submit"
+          onClick={onSubmitHandler}
+        >
+          수정
+        </Button>
+        <Button variant="outline-primary" type="submit" onClick={handleCancel}>
+          취소
+        </Button>
+      </Form>
+    
     </div>
   );
 }
 
-export default StudyForm;
+export default StudyEdit;

@@ -58,14 +58,7 @@ function Owner(props) {
                         height="30"
                         style= {{marginRight:"10px"}}
                     /><span>{user.nick + "  "}</span>
-                    <Badge pill bg="secondary">
-                        python
-                    </Badge>{' '}
-                    <Badge pill bg="secondary">
-                        machine learning
-                    </Badge>{' '}
                 </Card.Body>
-                <Button style={{float: 'right', marginTop: '16px', marginLeft: '10px'}} variant="outline-primary" size="sm">DM 보내기</Button>
                 <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
                                     <Button style={{float: 'right', marginTop: '16px'}} variant="outline-primary" size="sm">자세히보기</Button>
                 </OverlayTrigger>

@@ -46,7 +46,7 @@ function StudyForm(props) {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     api
-      .post("/study/create", {
+      .post("/study", {
         category: inputCategory,
         title: inputTitle,
         people: inputPeople,

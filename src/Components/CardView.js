@@ -1,12 +1,13 @@
 import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
 import React from "react";
+import api from '../Api/api'
 
 function CardView(props) {
   const study = props.study;
   const userId = props.id;
+  const isHeart = props.isHeart;
   const isMyPage = props.isMyPage;
 
-  const checkHeart = study.heart;
   const startDate = new Date(study.startLine.toString());
   const endDate = new Date(study.deadLine.toString());
 
@@ -16,15 +17,15 @@ function CardView(props) {
   }
 
   let heart;
+  if (isHeart) {
+    heart = <img width='40px' height= '40px' src='fillheart.jpg' alt="찜버튼"></img>
+  } else {
+    heart = <img width='40px' height= '40px' src='blankheart.jpg' alt="찜 해제 버튼"></img>;
+  }
   if (isMyPage) {
     heart = <></>
-  } else {
-    if (checkHeart) {
-      heart = <img width='40px' height= '40px' src='fillheart.jpg' alt="찜버튼"></img>
-    } else {
-      heart = <img width='40px' height= '40px' src='blankheart.jpg' alt="찜 해제 버튼"></img>;
-    }
   }
+
 
   let cardViewImg;
   if (props.study.category === "스터디") {
@@ -48,9 +49,41 @@ function CardView(props) {
   }
 
   const onClick = () => {
-    const getdisplay = this.props.getdisplay
-    if(window.confirm('찜을 해제하시겠습니까? \n찜을 해제하면 목록에서 해당 모집글이 없어집니다'))
-      getdisplay()
+    if (isHeart) {
+      console.log("click fill")
+      const deleteHeart = async () => {
+          try {
+              await api.delete(
+                `/heart`, {data: {
+                  userId: userId,
+                  studyId: study.id,
+                }}
+                ).then(res => {
+                  alert(`${study.title} 스터디 찜 취소가 완료되었습니다!\n 내가 찜한 스터디 목록에서 삭제됩니다.`)
+                  document.location.href=`/main?id=${userId}`
+                })
+          } catch (e) {
+          }
+      };
+      deleteHeart();
+    } else {
+      console.log("click blank")
+      const addHeart = async () => {
+          try {
+              await api.post(
+                `/heart/create`, {
+                  userId: userId,
+                  studyId: study.id,
+                }
+              ).then(res => {
+                  alert(`${study.title} 스터디 찜 완료되었습니다!\n 내가 찜한 스터디 목록을 통해 확인가능합니다.`)
+                  document.location.href=`/main?id=${userId}`
+                })
+          } catch (e) {
+          }
+      };
+      addHeart();
+    }
   }
   return (
     <Card id="card" style={{display:'block', width: '20rem'}}>

@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
 import api from '../Api/api'
 import Header from '../Components/Header';
+import Modal from '../Components/Modal.js';
+import StudyForm from '../Components/modal/StudyForm.js';
 import CardView from '../Components/CardView';
-import { Row, Col, Carousel } from "react-bootstrap";
+import { Row, Col, Carousel, Button } from "react-bootstrap";
  
 function MainPage(props) {
   //유저 fetch
@@ -12,18 +14,37 @@ function MainPage(props) {
 
   //study fetch
   const [study, setStudy] = useState([]);
+  const [modal, setModal] = useState({});
+  const [heartStudyList, setHeartStudyList] = useState([]);
+
+  const openModal = () => {
+    setModal({modalOpen: true})
+  }
+  const closeModal = () => {
+    setModal({ modalOpen: false })
+  }
 
   useEffect(() => {
       const fetchStudy = async () => {
           try {
               const response = await api.get(
-              `/study`
+              `/study/all/${idFromUrl}`
               );
               setStudy(response.data); // 데이터는 response.data 안에 들어있습니다.
           } catch (e) {
           }
       };
+      const fetchHeartStudy = async () => {
+          try {
+              const response = await api.get(
+              `/heart/heartStudyAllList/${idFromUrl}`
+              );
+              setHeartStudyList(response.data); // 데이터는 response.data 안에 들어있습니다.
+          } catch (e) {
+          }
+      };
       fetchStudy();
+      fetchHeartStudy();
   }, []);
   return (
     <div>
@@ -40,12 +61,13 @@ function MainPage(props) {
               src={require("../Assets/studyComputer.jpg").default}
               alt="First slide"
               style={{
-                height: "400px"
+                height: "500px"
               }}
             />
             <Carousel.Caption>
               <h3>함께 성장할 동료를 찾아요</h3>
               <p>#우리함께 #성장해요 #지금 #바로 #프로젝트에 #참여하세요</p>
+              <Button variant="light" size="lg" onClick={openModal}>프로젝트 모임 생성하기</Button>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
@@ -54,13 +76,14 @@ function MainPage(props) {
               src={require("../Assets/studyTogether.jpg").default}
               alt="Second slide"
               style={{
-                height: "400px"
+                height: "500px"
               }}
             />
 
             <Carousel.Caption>
               <h3>혼자 공부하기 힘들시죠? 같이 해요</h3>
               <p>#같이하면 #목표를 #달성할 #확률이 #커진대요</p>
+              <Button variant="light" size="lg" onClick={openModal}>스터디 생성하기</Button>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
@@ -69,17 +92,17 @@ function MainPage(props) {
               src={require("../Assets/studyAlone.jpg").default}
               alt="Third slide"
               style={{
-                height: "400px"
+                height: "500px"
               }}
             />
 
             <Carousel.Caption>
               <h3>모. 각. 코</h3>
               <p>#모여서 #각자 #코딩 #시작해보세요</p>
+              <Button variant="light" size="lg" onClick={openModal}>모각코 생성하기</Button>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
-
       <Row 
         xs={1}
         md={5}
@@ -89,11 +112,17 @@ function MainPage(props) {
         {study.map((study) => {
           return (
             <Col style={{marginBottom: "25px"}}>
-              <CardView study={study} id={idFromUrl}/>
+              <CardView study={study} id={idFromUrl} isHeart={heartStudyList.includes(study.id)} isMyPage={false}/>
             </Col>
           )})
         }
       </Row>
+      <Modal open={modal.modalOpen}>
+        <StudyForm
+          userId={idFromUrl}
+          close={closeModal}>
+        </StudyForm>
+      </Modal>
     </div>
   )
 }

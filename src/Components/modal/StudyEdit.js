@@ -28,11 +28,11 @@ function StudyEdit(props) {
   };
 
   const onStartLineHandler = (e) => {
-    setInputStartLine(e.value);
+    setInputStartLine(e);
   };
 
   const onDeadLineHandler = (e) => {
-    setInputDeadLine(e.value);
+    setInputDeadLine(e);
   };
 
   const handleContent = (e) => {
@@ -163,10 +163,16 @@ function StudyEdit(props) {
           variant="outline-primary"
           type="submit"
           onClick={onSubmitHandler}
+          style={{float:'right'}}
         >
           수정
         </Button>
-        <Button variant="outline-primary" type="submit" onClick={handleCancel}>
+        &nbsp;&nbsp;&nbsp;
+        <Button 
+            variant="outline-primary" 
+            type="submit" 
+            onClick={handleCancel}
+            style={{float:'right'}}>
           취소
         </Button>
       </Form>

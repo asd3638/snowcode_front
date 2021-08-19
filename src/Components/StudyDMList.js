@@ -44,7 +44,7 @@ function StudyDMList (props) {
       textAlign: "center"
     }}>
       <Tabs defaultActiveKey="heartStudy" id="uncontrolled-tab-example" className="mb-3" 
-      style={{borderColor: 'grey'}}>
+      style={{borderColor: 'grey', width: '800px'}}>
         <Tab eventKey="heartStudy" title="내가 찜한 스터디">
           <Row 
             xs={1}
@@ -54,7 +54,7 @@ function StudyDMList (props) {
             >
             {heartStudy.map((study) => {
               return (
-                <Col style={{marginBottom: "25px"}}>
+                <Col style={{marginBottom: "25px", display: 'flex', width: '270px', flexWrap: 'wrap'}}>
                   <CardView study={study} id={props.userId} isMyPage={props.isMyPage} isHeart={true}/>
                 </Col>
               )})
@@ -70,7 +70,7 @@ function StudyDMList (props) {
             >
             {study.map((study) => {
               return (
-                <Col style={{marginBottom: "25px"}}>
+                <Col style={{marginBottom: "25px", display: 'flex', width: '270px', flexWrap: 'wrap'}}>
                   <CardView study={study} id={props.userId} isMyPage={true}/>
                 </Col>
               )})

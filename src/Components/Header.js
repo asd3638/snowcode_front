@@ -80,14 +80,9 @@ function Header (props) {
                             </NavDropdown>
                             </Nav>
                         <Nav>
+                            
                             <Nav.Link href={"/mypage?id=" + user.id}>
-                                <img
-                                    alt=""
-                                    src={require("../Assets/main_women.png").default}
-                                    width="30"
-                                    height="30"
-                                    href={"/mypage?id=" + user.id}
-                                />{' '}{user.nick}
+                                {'안녕하세요 '}{user.nick}{'님'}
                                 </Nav.Link>
                             <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
                                 <Nav.Link>About</Nav.Link>

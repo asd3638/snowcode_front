@@ -92,7 +92,6 @@ function StudyForm(props) {
             </option>
           </Form.Select>
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>스터디명</Form.Label>
           <Form.Control
@@ -103,7 +102,6 @@ function StudyForm(props) {
             onChange={handleTitle}
           />
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>모집 인원</Form.Label>
           <Form.Select
@@ -120,7 +118,6 @@ function StudyForm(props) {
             <option value="8">8명</option>
           </Form.Select>
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <div style={{ display: "flex" }}>
             <div style={{ float: "left" }}>
@@ -139,7 +136,6 @@ function StudyForm(props) {
             </div>
           </div>
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>설명</Form.Label>
           <Form.Control
@@ -151,7 +147,6 @@ function StudyForm(props) {
             onChange={handleContent}
           />
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>이런분 원해요</Form.Label>
           <Form.Control
@@ -163,15 +158,21 @@ function StudyForm(props) {
             onChange={handleWanted}
           />
         </Form.Group>
-
         <Button
           variant="outline-primary"
           type="submit"
           onClick={onSubmitHandler}
+          style={{ float: "right" }}
         >
           만들기
         </Button>
-        <Button variant="outline-primary" type="submit" onClick={handleCancel}>
+        &nbsp;&nbsp;&nbsp;
+        <Button
+          variant="outline-primary"
+          type="submit"
+          onClick={handleCancel}
+          style={{ float: "right" }}
+        >
           취소
         </Button>
       </Form>

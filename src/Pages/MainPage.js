@@ -4,6 +4,7 @@ import Header from '../Components/Header';
 import Modal from '../Components/Modal.js';
 import StudyForm from '../Components/modal/StudyForm.js';
 import CardView from '../Components/CardView';
+import Footer from '../Components/Footer'
 import { Row, Col, Carousel, Button } from "react-bootstrap";
  
 function MainPage(props) {
@@ -46,9 +47,19 @@ function MainPage(props) {
       fetchStudy();
       fetchHeartStudy();
   }, []);
+  const fetchCategoryStudy = async (category) => {
+      try {
+          const response = await api.get(
+            `/study/category/${category}/${idFromUrl}`
+          );
+          setStudy(response.data); // 데이터는 response.data 안에 들어있습니다.
+      } catch (e) {
+      }
+  };
+
   return (
     <div>
-      <Header id={idFromUrl}/>
+      <Header id={idFromUrl} isMainPage={true} handleCategory={fetchCategoryStudy}/>
       <Carousel
           style={{
             width: "100%",
@@ -83,7 +94,7 @@ function MainPage(props) {
             <Carousel.Caption>
               <h3>혼자 공부하기 힘들시죠? 같이 해요</h3>
               <p>#같이하면 #목표를 #달성할 #확률이 #커진대요</p>
-              <Button variant="light" size="lg" onClick={openModal}>스터디 생성하기</Button>
+              <Button variant="light" size="lg" onClick={openModal}>스터디 그룹 생성하기</Button>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
@@ -99,7 +110,7 @@ function MainPage(props) {
             <Carousel.Caption>
               <h3>모. 각. 코</h3>
               <p>#모여서 #각자 #코딩 #시작해보세요</p>
-              <Button variant="light" size="lg" onClick={openModal}>모각코 생성하기</Button>
+              <Button variant="light" size="lg" onClick={openModal}>모각코 그롭 생성하기</Button>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
@@ -111,18 +122,20 @@ function MainPage(props) {
         >
         {study.map((study) => {
           return (
-            <Col style={{marginBottom: "25px"}}>
+            <Col style={{marginBottom: "25px", display: 'flex', width: 'maxWidth', flexWrap: 'wrap'}}>
               <CardView study={study} id={idFromUrl} isHeart={heartStudyList.includes(study.id)} isMyPage={false}/>
             </Col>
           )})
         }
       </Row>
+      <Footer/>
       <Modal open={modal.modalOpen}>
         <StudyForm
           userId={idFromUrl}
           close={closeModal}>
         </StudyForm>
       </Modal>
+
     </div>
   )
 }

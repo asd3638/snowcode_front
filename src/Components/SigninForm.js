@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Button, Card, Form } from 'react-bootstrap';
 import api from '../Api/api'
 import "../App.css"
+import swal from 'sweetalert'
 
 function SigninForm() {
     const [inputEmail, setInputEmail] = useState('');
@@ -25,19 +26,42 @@ function SigninForm() {
             nick: inputNick
         })
         .then(res => {
-            if(res.data === "already exist"){
-                alert('입력하신 정보로 회원이 이미 존재합니다.');
-                document.location.href = '/';
+            if(res.data === "aee"){
+                swal('입력하신 정보로 회원이 존재합니다.')
+                    .then((value) => {
+                      if (value) {
+                        document.location.href = '/';
+                      }
+                    }
+                )
+            } else if(res.data === "aen"){
+                swal('이미 있는 닉네임입니다. 다른 닉네임을 입력해주세요')
+                    .then((value) => {
+                      if (value) {
+                        document.location.href = '/signin';
+                      }
+                    }
+                )
             } else if(res.data === "success"){
-                alert('정상 가입 되었습니다. 로그인 페이지로 이동합니다.')
-                document.location.href = '/';
+                swal('정상 가입 되었습니다. 로그인 페이지로 이동합니다.')
+                    .then((value) => {
+                      if (value) {
+                        document.location.href = '/';
+                      }
+                    }
+                )
             }
         })
         .catch()
     }
     const handleCancel = () => {
-        alert('회원가입을 취소하였습니다.')
-        document.location.href = '/';
+        swal('회원가입을 취소하였습니다.')
+            .then((value) => {
+            if (value) {
+                document.location.href = '/';
+            }
+            }
+        )
     }
     return (
         <Card className="signinCard">
@@ -68,16 +92,16 @@ function SigninForm() {
                         </Button>
                     </div>
                 </Form>
-                <div style={{float: 'right', marginTop: '10px'}}>
-                    <img
-                        alt=""
-                        src={require("../Assets/main_logo.png").default}
-                        width="30"
-                        height="30"
-                    />{' '}
-                    snowcode
-                </div>
             </Card.Body>
+            <div style={{float: 'right', marginTop: '10px', alignSelf: 'center'}}>
+                <img
+                    alt=""
+                    src={require("../Assets/main_logo.png").default}
+                    width="30"
+                    height="30"
+                />{' '}
+                snowcode
+            </div>
         </Card>
     );
 };

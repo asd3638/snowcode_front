@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
+import swal from 'sweetalert'
 
 class StudyForm extends Component {
   state = {
@@ -27,7 +28,7 @@ class StudyForm extends Component {
   }
 
   onSubmit = () => {
-    alert("글이 성공적으로 생성되었습니다.");
+    swal('회원가입을 취소하였습니다.');
   };
 
   render() {

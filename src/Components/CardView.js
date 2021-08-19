@@ -1,6 +1,7 @@
 import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
 import React from "react";
 import api from '../Api/api'
+import swal from "sweetalert";
 
 function CardView(props) {
   const study = props.study;
@@ -59,8 +60,13 @@ function CardView(props) {
                   studyId: study.id,
                 }}
                 ).then(res => {
-                  alert(`${study.title} 스터디 찜 취소가 완료되었습니다!\n 내가 찜한 스터디 목록에서 삭제됩니다.`)
-                  document.location.href=`/main?id=${userId}`
+                  swal(`${study.title} 스터디 찜 취소가 완료되었습니다!\n 내가 찜한 스터디 목록에서 삭제됩니다.`)
+                    .then((value) => {
+                      if (value) {
+                        document.location.href=`/main?id=${userId}`
+                      }
+                    }
+                  )
                 })
           } catch (e) {
           }
@@ -76,8 +82,13 @@ function CardView(props) {
                   studyId: study.id,
                 }
               ).then(res => {
-                  alert(`${study.title} 스터디 찜 완료되었습니다!\n 내가 찜한 스터디 목록을 통해 확인가능합니다.`)
-                  document.location.href=`/main?id=${userId}`
+                  swal(`${study.title} 스터디 찜 완료되었습니다!\n 내가 찜한 스터디 목록을 통해 확인가능합니다.`)
+                      .then((value) => {
+                        if (value) {
+                          document.location.href=`/main?id=${userId}`
+                        }
+                      }
+                    )
                 })
           } catch (e) {
           }

@@ -21,7 +21,7 @@ const DetailPage = (props) => {
                     </div>
                 </div>
                 <div style={{float: 'left'}}>
-                    <Comment/>
+                    <Comment user_id={userId} study_id={studyId}/>
                 </div>
             </div>
         </div>

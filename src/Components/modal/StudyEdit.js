@@ -3,6 +3,7 @@ import api from "../../Api/api.js";
 import { Form, Button } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import swal from "sweetalert"
 
 // category, title, people, startLine, deadLine, content, wanted
 function StudyEdit(props) {
@@ -10,8 +11,8 @@ function StudyEdit(props) {
   const [inputCategory, setInputCategory] = useState(props.study.category);
   const [inputTitle, setInputTitle] = useState(props.study.title);
   const [inputPeople, setInputPeople] = useState(props.study.people);
-  const [inputStartLine, setInputStartLine] = useState(props.study.startLine);
-  const [inputDeadLine, setInputDeadLine] = useState(props.study.deadLine);
+  const [inputStartLine, setInputStartLine] = useState(new Date());
+  const [inputDeadLine, setInputDeadLine] = useState(new Date());
   const [inputContent, setInputContent] = useState(props.study.content);
   const [inputWanted, setInputWanted] = useState(props.study.wanted);
 
@@ -58,8 +59,13 @@ function StudyEdit(props) {
       })
       .then((res) => {
         if (res.data === "success") {
-            alert("스터디가 수정되었습니다.");
-            document.location.href = `/detail?id=${props.study.writter}&studyId=${props.study.id}`
+            swal("스터디가 수정되었습니다.")
+                .then((value) => {
+                    if (value) {
+                    document.location.href = `/detail?id=${props.study.writter}&studyId=${props.study.id}`
+                    }
+                }
+            )
         }
       })
       .catch();
@@ -123,14 +129,14 @@ function StudyEdit(props) {
             <div style={{ float: "left" }}>
               <Form.Label>시작 날짜</Form.Label>
               <DatePicker
-                selected={new Date()}
+                selected={inputStartLine}
                 onChange={(date) => onStartLineHandler(date)}
               />
             </div>
             <div style={{ float: "left" }}>
               <Form.Label>종료 날짜</Form.Label>
               <DatePicker
-                selected={new Date()}
+                selected={inputDeadLine}
                 onChange={(date) => onDeadLineHandler(date)}
               />
             </div>

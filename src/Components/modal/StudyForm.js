@@ -3,6 +3,7 @@ import api from "../../Api/api.js";
 import { Form, Button } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import swal from "sweetalert"
 
 // category, title, people, startLine, deadLine, content, wanted
 function StudyForm(props) {
@@ -58,15 +59,20 @@ function StudyForm(props) {
       })
       .then((res) => {
         if (res.data === "success") {
-          alert("스터디가 생성되었습니다.");
-          document.location.href = `/main?id=${props.userId}`
+          swal("스터디 생성이 완료되었습니다.")
+            .then((value) => {
+                if (value) {
+                    document.location.href = `/main?id=${props.userId}`
+                }
+            }
+          )
         }
       })
       .catch();
   };
 
   const handleCancel = () => {
-    alert("스터디 생성이 취소되었습니다.");
+    swal("스터디 생성이 취소되었습니다.");
     a();
   };
 
@@ -94,7 +100,7 @@ function StudyForm(props) {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>스터디명</Form.Label>
+          <Form.Label>타이틀</Form.Label>
           <Form.Control
             name="title"
             type="text"

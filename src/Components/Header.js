@@ -16,6 +16,8 @@ const popover = (
 );
 
 function Header (props) {
+    const isMainPage = props.isMainPage;
+    const handleCategory = props.handleCategory;
     const [user, setUser] = useState({});
     const [modal, setModal] = useState({});
     const [loading, setLoading] = useState(false);
@@ -54,6 +56,23 @@ function Header (props) {
             console.log(err);
         }
     }
+    const showStudy = () => {
+        handleCategory("스터디");
+    }
+    const showContest = () => {
+        handleCategory("공모전");
+    }
+    const showGrad = () => {
+        handleCategory("졸업작품")
+    }
+    let categoryDrd = <></>;
+    if (isMainPage) {
+        categoryDrd = <NavDropdown title="category" id="collasible-nav-dropdown">
+                            <NavDropdown.Item onClick={showStudy}>스터디</NavDropdown.Item>
+                            <NavDropdown.Item onClick={showContest}>공모전</NavDropdown.Item>
+                            <NavDropdown.Item onClick={showGrad}>졸업작품</NavDropdown.Item>
+                        </NavDropdown>;
+    }
     return (
         <div>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -73,11 +92,7 @@ function Header (props) {
                         <Nav className="me-auto">
                             <Nav.Link href={"/main?id=" + user.id}>Home</Nav.Link>
                             <Nav.Link href={"/mypage?id=" + user.id}>MyPage</Nav.Link>
-                            <NavDropdown title="category" id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">스터디</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">공모전</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">졸업작품</NavDropdown.Item>
-                            </NavDropdown>
+                            {categoryDrd}
                             </Nav>
                         <Nav>
                             

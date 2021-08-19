@@ -1,17 +1,28 @@
+@font-face {
+  font-family: "BBTreeGB";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGB.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.App {
+  font-family: "BBTreeGB";
+}
 .loginCard {
-    width: 30rem;
-    margin: auto;
-    margin-top: 200px;
+  width: 30rem;
+  margin: auto;
+  margin-top: 200px;
 }
 .signinCard {
-    width: 30rem;
-    margin: auto;
-    margin-top: 200px;
+  width: 30rem;
+  margin: auto;
+  margin-top: 200px;
 }
 .snsloginBtn {
-    align-items: flex-end;
+  align-items: flex-end;
 }
 .scroll {
-    max-height: 550px;
-    overflow-y: auto;
+  max-height: 550px;
+  overflow-y: auto;
 }

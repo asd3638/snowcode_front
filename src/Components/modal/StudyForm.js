@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import axios from "axios";
-import api from "../../Api/api";
+import api from "../../Api/api.js";
 import { Form, Button } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 // category, title, people, startLine, deadLine, content, wanted
-function StudyForm() {
-  const [inputCategory, setInputCategory] = useState(null);
+function StudyForm(props) {
+  const a = props.close;
+  const [inputCategory, setInputCategory] = useState("스터디");
   const [inputTitle, setInputTitle] = useState("");
-  const [inputPeople, setInputPeople] = useState(null);
+  const [inputPeople, setInputPeople] = useState(1);
   const [inputStartLine, setInputStartLine] = useState(new Date());
   const [inputDeadLine, setInputDeadLine] = useState(new Date());
   const [inputContent, setInputContent] = useState("");
@@ -20,37 +20,19 @@ function StudyForm() {
   };
 
   const onCategoryHandler = (e) => {
-    setInputCategory(e.value);
-    fetchCategory();
+    setInputCategory(e.target.value);
   };
 
   const onPeopleHandler = (e) => {
-    setInputPeople(e.value);
-    fetchPeople();
+    setInputPeople(e.target.value);
   };
 
   const onStartLineHandler = (e) => {
-    setInputStartLine(e.value);
-    fetchPeople();
+    setInputStartLine(e);
   };
 
   const onDeadLineHandler = (e) => {
-    setInputDeadLine(e.value);
-    fetchPeople();
-  };
-
-  const fetchCategory = async () => {
-    const response = await axios("", {
-      category: inputCategory,
-    });
-    console.log(response.data);
-  };
-
-  const fetchPeople = async () => {
-    const response = await axios("", {
-      people: inputPeople,
-    });
-    console.log(response.data);
+    setInputDeadLine(e);
   };
 
   const handleContent = (e) => {
@@ -63,9 +45,8 @@ function StudyForm() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
     api
-      .post("auth/join", {
+      .post("/study/create", {
         category: inputCategory,
         title: inputTitle,
         people: inputPeople,
@@ -73,19 +54,20 @@ function StudyForm() {
         deadLine: inputDeadLine,
         content: inputContent,
         wanted: inputWanted,
+        writter: props.userId,
       })
       .then((res) => {
         if (res.data === "success") {
           alert("스터디가 생성되었습니다.");
-          document.location.href = "/";
+          document.location.href = `/main?id=${props.userId}`;
         }
       })
       .catch();
   };
 
   const handleCancel = () => {
-    alert("스터디 생성을 취소하였습니다.");
-    document.location.href = "/";
+    alert("스터디 생성이 취소되었습니다.");
+    a();
   };
 
   return (
@@ -99,13 +81,13 @@ function StudyForm() {
             onChange={onCategoryHandler}
             aria-label="Floating label select example"
           >
-            <option name="category" value="language">
+            <option name="category" value="스터디">
               스터디
             </option>
-            <option name="category" value="project">
+            <option name="category" value="공모전">
               공모전
             </option>
-            <option name="category" value="algorithm">
+            <option name="category" value="졸업작품">
               졸업작품
             </option>
           </Form.Select>
@@ -132,6 +114,10 @@ function StudyForm() {
             <option value="2">2명</option>
             <option value="3">3명</option>
             <option value="4">4명</option>
+            <option value="5">5명</option>
+            <option value="6">6명</option>
+            <option value="7">7명</option>
+            <option value="8">8명</option>
           </Form.Select>
         </Form.Group>
 

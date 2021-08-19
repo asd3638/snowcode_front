@@ -10,15 +10,14 @@ class MainPage extends React.Component {
     const idFromUrl = params.get("id");
     return (
       <div style={{ width: "100%", height: "50%" }}>
-        <Header id={idFromUrl} />
+        {/* <Header id={idFromUrl} /> */}
         <Carousel
           style={{
             width: "100%",
             maxWidth: "100%",
-            height: "20",
           }}
         >
-          <Carousel.Item>
+          <Carousel.Item style={{ height: "30%" }}>
             <img
               className="d-block w-100"
               src={require("../Assets/study_computer.jpg").default}

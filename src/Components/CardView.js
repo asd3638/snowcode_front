@@ -21,7 +21,7 @@ function CardView(props) {
           <Card.Img
             variant="top"
             alt=""
-            src={require("../Assets/contest.png").default}
+            src={require("../Assets/python.jpg").default}
             style={{ width: "245px", height: "185px" }}
           />
         </div>

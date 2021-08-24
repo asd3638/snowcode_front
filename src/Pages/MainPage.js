@@ -56,10 +56,19 @@ function MainPage(props) {
       } catch (e) {
       }
   };
+  const fetchCategoryStudyAll = async () => {
+      try {
+          const response = await api.get(
+            `/study/all/${idFromUrl}`
+          );
+          setStudy(response.data); // 데이터는 response.data 안에 들어있습니다.
+      } catch (e) {
+      }
+  };
 
   return (
     <div>
-      <Header id={idFromUrl} isMainPage={true} handleCategory={fetchCategoryStudy}/>
+      <Header id={idFromUrl} isMainPage={true} handleCategory={fetchCategoryStudy} handleCategoryAll={fetchCategoryStudyAll}/>
       <Carousel
           style={{
             width: "100%",

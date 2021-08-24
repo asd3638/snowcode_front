@@ -18,6 +18,7 @@ const popover = (
 function Header (props) {
     const isMainPage = props.isMainPage;
     const handleCategory = props.handleCategory;
+    const handleCategoryAll = props.handleCategoryAll;
     const [user, setUser] = useState({});
     const [modal, setModal] = useState({});
     const [loading, setLoading] = useState(false);
@@ -65,9 +66,13 @@ function Header (props) {
     const showGrad = () => {
         handleCategory("졸업작품")
     }
+    const showAll = () => {
+        handleCategoryAll();
+    }
     let categoryDrd = <></>;
     if (isMainPage) {
         categoryDrd = <NavDropdown title="category" id="collasible-nav-dropdown">
+                            <NavDropdown.Item onClick={showAll}>전체</NavDropdown.Item>
                             <NavDropdown.Item onClick={showStudy}>스터디</NavDropdown.Item>
                             <NavDropdown.Item onClick={showContest}>공모전</NavDropdown.Item>
                             <NavDropdown.Item onClick={showGrad}>졸업작품</NavDropdown.Item>

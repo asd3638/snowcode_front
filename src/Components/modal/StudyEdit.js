@@ -72,8 +72,30 @@ function StudyEdit(props) {
   };
 
   const handleCancel = () => {
-    alert("스터디 수정이 취소되었습니다.");
-    a();
+      swal("스터디 수정이 취소되었습니다.")
+        .then((value) => {
+            if (value) {
+                a();
+            }
+        }
+    )
+  };
+  const handleRemove = () => {
+    api
+      .delete(`/study/${props.study.id}`)
+      .then((res) => {
+        console.log(res.data)
+        if (res.data === "success") {
+            swal("스터디가 삭제되었습니다.")
+                .then((value) => {
+                    if (value) {
+                      document.location.href = `/main?id=${props.study.writter}`
+                    }
+                }
+            )
+        }
+      })
+      .catch();
   };
 
   return (
@@ -165,21 +187,26 @@ function StudyEdit(props) {
           />
         </Form.Group>
 
+        <Button 
+            variant="outline-primary" 
+            onClick={handleCancel}
+            style={{float:'right'}}>
+          취소
+        </Button>
         <Button
           variant="outline-primary"
-          type="submit"
           onClick={onSubmitHandler}
           style={{float:'right'}}
         >
           수정
         </Button>
         &nbsp;&nbsp;&nbsp;
+
         <Button 
-            variant="outline-primary" 
-            type="submit" 
-            onClick={handleCancel}
-            style={{float:'right'}}>
-          취소
+            variant="outline-danger" 
+            onClick={handleRemove}
+            style={{float:'left'}}>
+          삭제
         </Button>
       </Form>
     
